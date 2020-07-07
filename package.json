@@ -1,6 +1,6 @@
 {
     "name": "maishu-markdonw-doc",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "dependencies": {
         "maishu-chitu-react": "^1.27.0",
         "marked": "^1.1.0",
