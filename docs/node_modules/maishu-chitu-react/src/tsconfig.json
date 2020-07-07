@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "target": "es6",
+        "module": "amd",
+        "declaration": true,
+        "baseUrl": "./",
+        "outDir": "../out",
+        "paths": {
+            "maishu-chitu": [
+                "../node_modules/maishu-chitu/out/index.d.ts",
+            ],
+            "maishu-chitu-service": [
+                "../node_modules/maishu-chitu-service/out/index.d.ts",
+            ],
+            "csstype":[
+                "../node_modules/csstype/index.d.ts"
+            ]
+        },
+        "strictBindCallApply": true,
+        "strictNullChecks": true,
+        "strictFunctionTypes": true,
+        "jsx": "react",
+    }
+}

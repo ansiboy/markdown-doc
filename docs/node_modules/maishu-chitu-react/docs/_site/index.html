@@ -1,0 +1,127 @@
+<html lang="en-US">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/chitu-react/assets/css/style.css" media="screen" type="text/css">
+    <link rel="stylesheet" href="/chitu-react/assets/css/print.css" media="print" type="text/css">
+    <style>
+        #main-content{
+            width: 100%;
+        }
+    </style>
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Begin Jekyll SEO tag v2.5.0 -->
+    <title>chitu-react</title>
+    <meta name="generator" content="Jekyll v3.7.4" />
+    <meta property="og:title" content="chitu-react" />
+    <meta property="og:locale" content="en_US" />
+    <link rel="canonical" href="https://ansiboy.github.io/chitu-react/" />
+    <meta property="og:url" content="https://ansiboy.github.io/chitu-react/" />
+    <meta property="og:site_name" content="chitu-react" />
+    <script type="application/ld+json">
+{"headline":"chitu-react","@type":"WebSite","url":"https://ansiboy.github.io/chitu-react/","name":"chitu-react","@context":"http://schema.org"}</script>
+    <!-- End Jekyll SEO tag -->
+
+</head>
+
+<body>
+    <header>
+        <div class="inner">
+            <a href="https://ansiboy.github.io/chitu-react/">
+                <h1>chitu-react</h1>
+            </a>
+            <h2>CHITU 框架的一个扩展</h2>
+
+            <a href="https://github.com/ansiboy/chitu-react" class="button"><small>View project on</small> GitHub</a>
+
+
+        </div>
+    </header>
+
+    <div id="content-wrapper">
+        <div class="inner clearfix">
+            <section id="main-content">
+                <h2 id="安装">安装</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install maishu-chitu-react
+</code></pre></div></div>
+
+<h2 id="如何使用">如何使用</h2>
+
+<ol>
+  <li>
+    <p>引用 require js</p>
+
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+ <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdn.bootcss.com/require.js/2.3.6/require.js"</span> <span class="na">data-main=</span><span class="s">"index"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>配置 require js</p>
+
+    <p>在 index.js 文件配置 requirejs</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nx">require</span><span class="p">.</span><span class="nx">config</span><span class="p">({</span>
+     <span class="na">paths</span><span class="p">:</span> <span class="p">{</span>
+         <span class="s1">'react'</span><span class="p">:</span> <span class="s1">'https://cdn.bootcss.com/react/16.6.0/umd/react.development'</span><span class="p">,</span>
+         <span class="s1">'react-dom'</span><span class="p">:</span> <span class="s1">'https://cdn.bootcss.com/react-dom/16.6.0/umd/react-dom.development'</span><span class="p">,</span>
+         <span class="s1">'maishu-chitu'</span><span class="p">:</span> <span class="s1">'node_modules/maishu-chitu/dist/chitu'</span><span class="p">,</span>
+         <span class="s1">'maishu-chitu-react'</span><span class="p">:</span> <span class="s1">'node_modules/maishu-chitu-react/out/index'</span>
+     <span class="p">}</span>
+ <span class="p">})</span>
+
+ <span class="nx">require</span><span class="p">([</span><span class="s1">'maishu-chitu-react'</span><span class="p">],</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chitu_react</span><span class="p">)</span> <span class="p">{</span>
+     <span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">chitu_react</span><span class="p">.</span><span class="nx">Application</span><span class="p">();</span>
+     <span class="nx">app</span><span class="p">.</span><span class="nx">run</span><span class="p">()</span>
+ <span class="p">})</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>如果使用 typescript，还需要配置路径，如：</p>
+
+    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="s2">"compileOnSave"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"compilerOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="s2">"jsx"</span><span class="p">:</span><span class="w"> </span><span class="s2">"react"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"module"</span><span class="p">:</span><span class="w"> </span><span class="s2">"amd"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"baseUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"paths"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+             </span><span class="s2">"maishu-chitu"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                 </span><span class="s2">"node_modules/maishu-chitu/dist/chitu.d.ts"</span><span class="w">
+             </span><span class="p">],</span><span class="w">
+             </span><span class="s2">"maishu-chitu-react"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                 </span><span class="s2">"node_modules/maishu-chitu-react/out/index.d.ts"</span><span class="w">
+             </span><span class="p">]</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+     </span><span class="p">}</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+</ol>
+
+
+            </section>
+
+
+        </div>
+
+    </div>
+
+    <footer style="text-align:center;">
+        <p class="repo-owner"><a href="https://github.com/ansiboy/chitu-react">chitu-react</a> is maintained by
+            <a href="https://github.com/ansiboy">ansiboy</a>.</p>
+
+
+        <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</p>
+    </footer>
+
+</body>
+
+</html>

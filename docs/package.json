@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "maishu-markdonw-doc": "file:.."
+    "maishu-markdonw-doc": "^1.1.0"
   }
 }
