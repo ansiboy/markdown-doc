@@ -17,4 +17,5 @@ declare var hljs: {
 };
 
 declare var requirejs: any;
+declare var define;
 

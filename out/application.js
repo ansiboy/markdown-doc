@@ -9,14 +9,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const maishu_chitu_react_1 = require("maishu-chitu-react");
+const maishu_chitu_1 = require("maishu-chitu");
 const marked = require("marked");
-const React = require("react");
-const ReactDOM = require("react-dom");
-require("js/highlight/highlight.pack");
-require("js/marked");
-class MyApplication extends maishu_chitu_react_1.Application {
-    loadMarkdown(path) {
+require("../js/highlight/highlight.pack");
+require("../js/marked");
+const path_1 = require("maishu-toolkit/out/path");
+require("../js/highlight/styles/rainbow.css");
+require("../css/bootstrap.css");
+require("../css/site.css");
+const errors_1 = require("./errors");
+class MyApplication extends maishu_chitu_1.Application {
+    static loadMarkdown(path) {
         return __awaiter(this, void 0, void 0, function* () {
             let r = yield fetch(path);
             let text = yield r.text();
@@ -43,45 +46,55 @@ class MyApplication extends maishu_chitu_react_1.Application {
         });
         return __awaiter(this, void 0, void 0, function* () {
             let url = `${path}.md`;
-            let app = this;
             let superLoadjs = _super.loadjs;
             return {
-                default: class extends React.Component {
-                    render() {
-                        return React.createElement("div", { className: "container", ref: (e) => __awaiter(this, void 0, void 0, function* () {
-                                if (!e)
-                                    return;
-                                let { html } = yield app.loadMarkdown(url);
-                                e.innerHTML = html;
-                                e.querySelectorAll('code').forEach(block => {
-                                    // hljs.highlightBlock(block);
+                default: (page) => {
+                    let container = document.createElement("div");
+                    container.className = "container";
+                    page.element.appendChild(container);
+                    MyApplication.loadMarkdown(url).then(r => {
+                        container.innerHTML = r.html;
+                        container.querySelectorAll("[path]").forEach(s => {
+                            if (s.tagName == "CODE")
+                                return;
+                            let samplePath = s.getAttribute("path");
+                            let arr = path.split("/");
+                            arr.pop();
+                            let directoryPath = arr.join("/");
+                            samplePath = path_1.pathContact("/", directoryPath, samplePath);
+                            superLoadjs.apply(exports.app, [samplePath]).then(mod => {
+                                let func = mod.default || mod;
+                                if (func == null)
+                                    throw errors_1.errors.moduleExportNull(samplePath);
+                                if (typeof func == null)
+                                    throw errors_1.errors.moduleExportNotFunction(samplePath);
+                                func(s);
+                            });
+                        });
+                        container.querySelectorAll("code").forEach(c => {
+                            let name = c.getAttribute("path");
+                            if (name) {
+                                let arr = path.split("/");
+                                arr.pop();
+                                let directoryPath = arr.join("/");
+                                let codePath = path_1.pathContact("/", directoryPath, name);
+                                fetch(codePath).then(r => {
+                                    return r.text();
+                                }).then(text => {
+                                    c.textContent = text;
+                                    hljs.highlightBlock(c);
+                                }).catch(err => {
+                                    console.error(err);
                                 });
-                                e.querySelectorAll("sample").forEach(s => {
-                                    let name = s.getAttribute("name");
-                                    let arr = path.split("/");
-                                    arr.pop();
-                                    arr.push(name);
-                                    let samplePath = arr.join("/");
-                                    superLoadjs.apply(app, [samplePath]).then(mod => {
-                                        console.assert(mod.default != null);
-                                        ReactDOM.render(React.createElement(mod.default), s);
-                                    });
-                                });
-                                e.querySelectorAll("code").forEach(c => {
-                                    let name = c.getAttribute("name");
-                                    if (!name)
-                                        return;
-                                    let arr = path.split("/");
-                                    arr.pop();
-                                    arr.push(name);
-                                    let codePath = arr.join("/");
-                                    fetch(codePath).then((r) => __awaiter(this, void 0, void 0, function* () {
-                                        c.textContent = yield r.text();
-                                        hljs.highlightBlock(c);
-                                    }));
-                                });
-                            }) });
-                    }
+                            }
+                            else {
+                                hljs.highlightBlock(c);
+                            }
+                        });
+                    }).catch(err => {
+                        console.error(err);
+                        container.innerHTML = JSON.stringify(err);
+                    });
                 }
             };
         });
