@@ -15,8 +15,6 @@
 
 1. 创建 index.html 文件，如下：
 
-
-    ```html
     <html>
     <head></head>
 
@@ -27,7 +25,7 @@
         ></script>
     </body>
     </html>
-    ```
+
 1. 创建 markdown 文件
     
     Markdown 文件需要放在名为 modules 的文件夹内。在该文件内创建明为 index.md 的文件夹，例如

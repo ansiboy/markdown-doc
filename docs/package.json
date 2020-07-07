@@ -1,9 +1,5 @@
 {
   "dependencies": {
-    "maishu-markdonw-doc": "file:..",
-    "maishu-toolkit": "^1.4.14",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "requirejs": "^2.3.6"
+    "maishu-markdonw-doc": "file:.."
   }
 }
