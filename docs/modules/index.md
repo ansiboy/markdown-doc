@@ -1,9 +1,6 @@
 # MARKDOWN-DOC
 
-更方便使用 MARKDOWN 编写 IT 文档，为程序员而设计，主要功能
-
-1. 集成了 highlight 语法着色功能
-1. 让 JS 范例的运行
+更方便使用 MARKDOWN 编写 IT 文档，为程序员而设计。
 
 ## 安装
 
