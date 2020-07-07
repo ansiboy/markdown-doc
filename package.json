@@ -1,0 +1,13 @@
+{
+    "name": "maishu-markdonw-doc",
+    "version": "1.0.0",
+    "dependencies": {
+        "maishu-chitu-react": "^1.27.0",
+        "marked": "^1.1.0",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1"
+    },
+    "devDependencies": {
+        "@types/marked": "^1.1.0"
+    }
+}
