@@ -1,6 +1,6 @@
 /*!
  * 
- *  maishu-markdonw-doc v1.2.0
+ *  maishu-markdonw-doc v1.3.0
  *  
  *  Copyright (C) maishu All rights reserved.
  *   
