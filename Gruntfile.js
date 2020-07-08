@@ -5,7 +5,8 @@ module.exports = function (grunt) {
         copy: {
             dist: {
                 files: [
-                    { expand: true, cwd: "dist", src: "*.js", dest: "docs/js/maishu-markdonw-doc/dist" }
+                    { expand: true, cwd: "dist", src: "*.js", dest: "docs/js/maishu-markdonw-doc/dist" },
+                    { expand: true, cwd: "out", src: "*.js", dest: "docs/js/maishu-markdonw-doc/out" }
                 ]
             }
         }

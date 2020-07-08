@@ -8,7 +8,12 @@ import "../css/bootstrap.css";
 import "../css/site.css";
 import { errors } from "./errors";
 
+let config = window["config"] as Config;
+
+let masterPage = document.createElement("div");
+
 class MyApplication extends Application {
+    #menuElement: HTMLMenuElement;
 
     private static async loadMarkdown(path: string) {
         let r = await fetch(path);
@@ -28,6 +33,46 @@ class MyApplication extends Application {
         })
         let html = marked(text);
         return { html };
+    }
+
+    constructor(...args) {
+        super({ container: masterPage.querySelector("article") });
+
+        this.#menuElement = masterPage.querySelector("menu");
+
+        this.pageShowing.add((sender, page) => {
+            if (config.hideMenuPages != null && config.hideMenuPages.indexOf(page.name) >= 0 &&
+                this.#menuElement != null) {
+                this.#menuElement.style.display = "none";
+            }
+            else {
+                this.#menuElement.style.removeProperty("display");
+            }
+        })
+    }
+
+
+    static initMasterPage() {
+        masterPage.innerHTML = `
+            <menu>
+            </menu>
+            <article>
+            </article>
+        `;
+        document.body.appendChild(masterPage);
+
+        if (config.menuPage) {
+            let path = pathContact("modules", config.menuPage);
+            this.loadMarkdown(path).then(r => {
+                let node = document.createElement("div");
+                node.innerHTML = r.html;
+                let menuNode = node.querySelector("menu");
+                let targetMenuNode = masterPage.querySelector("menu");
+                if (menuNode != null && targetMenuNode != null) {
+                    targetMenuNode.innerHTML = menuNode.innerHTML;
+                }
+            });
+        }
     }
 
     async loadjs(path: string) {
@@ -93,5 +138,7 @@ class MyApplication extends Application {
         }
     }
 }
+
+MyApplication.initMasterPage();
 
 export let app = new MyApplication();

@@ -1,12 +1,19 @@
 h2 {
   font-size: 24px;
 }
+
 h3 {
   font-size: 20px;
 }
+
 a {
   font-size: 16px;
 }
+
 ol {
   padding-left: 16px;
+}
+
+menu {
+  float  : left;
 }

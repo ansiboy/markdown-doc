@@ -1559,7 +1559,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "h2 {\r\n  font-size: 24px;\r\n}\r\nh3 {\r\n  font-size: 20px;\r\n}\r\na {\r\n  font-size: 16px;\r\n}\r\nol {\r\n  padding-left: 16px;\r\n}\r\n", ""]);
+exports.push([module.i, "h2 {\r\n  font-size: 24px;\r\n}\r\n\r\nh3 {\r\n  font-size: 20px;\r\n}\r\n\r\na {\r\n  font-size: 16px;\r\n}\r\n\r\nol {\r\n  padding-left: 16px;\r\n}\r\n\r\nmenu {\r\n  float  : left;\r\n}", ""]);
 // Exports
 module.exports = exports;
 
@@ -6004,6 +6004,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, privateMap, value) {
+    if (!privateMap.has(receiver)) {
+        throw new TypeError("attempted to set private field on non-instance");
+    }
+    privateMap.set(receiver, value);
+    return value;
+};
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, privateMap) {
+    if (!privateMap.has(receiver)) {
+        throw new TypeError("attempted to get private field on non-instance");
+    }
+    return privateMap.get(receiver);
+};
+var _menuElement;
 Object.defineProperty(exports, "__esModule", { value: true });
 const maishu_chitu_1 = __webpack_require__(/*! maishu-chitu */ "./node_modules/maishu-chitu/dist/index.js");
 const marked = __webpack_require__(/*! marked */ "./node_modules/marked/lib/marked.js");
@@ -6014,7 +6028,23 @@ __webpack_require__(/*! ../js/highlight/styles/rainbow.css */ "./js/highlight/st
 __webpack_require__(/*! ../css/bootstrap.css */ "./css/bootstrap.css");
 __webpack_require__(/*! ../css/site.css */ "./css/site.css");
 const errors_1 = __webpack_require__(/*! ./errors */ "./out/errors.js");
+let config = window["config"];
+let masterPage = document.createElement("div");
 class MyApplication extends maishu_chitu_1.Application {
+    constructor(...args) {
+        super({ container: masterPage.querySelector("article") });
+        _menuElement.set(this, void 0);
+        __classPrivateFieldSet(this, _menuElement, masterPage.querySelector("menu"));
+        this.pageShowing.add((sender, page) => {
+            if (config.hideMenuPages != null && config.hideMenuPages.indexOf(page.name) >= 0 &&
+                __classPrivateFieldGet(this, _menuElement) != null) {
+                __classPrivateFieldGet(this, _menuElement).style.display = "none";
+            }
+            else {
+                __classPrivateFieldGet(this, _menuElement).style.removeProperty("display");
+            }
+        });
+    }
     static loadMarkdown(path) {
         return __awaiter(this, void 0, void 0, function* () {
             let r = yield fetch(path);
@@ -6035,6 +6065,27 @@ class MyApplication extends maishu_chitu_1.Application {
             let html = marked(text);
             return { html };
         });
+    }
+    static initMasterPage() {
+        masterPage.innerHTML = `
+            <menu>
+            </menu>
+            <article>
+            </article>
+        `;
+        document.body.appendChild(masterPage);
+        if (config.menuPage) {
+            let path = path_1.pathContact("modules", config.menuPage);
+            this.loadMarkdown(path).then(r => {
+                let node = document.createElement("div");
+                node.innerHTML = r.html;
+                let menuNode = node.querySelector("menu");
+                let targetMenuNode = masterPage.querySelector("menu");
+                if (menuNode != null && targetMenuNode != null) {
+                    targetMenuNode.innerHTML = menuNode.innerHTML;
+                }
+            });
+        }
     }
     loadjs(path) {
         const _super = Object.create(null, {
@@ -6096,6 +6147,8 @@ class MyApplication extends maishu_chitu_1.Application {
         });
     }
 }
+_menuElement = new WeakMap();
+MyApplication.initMasterPage();
 exports.app = new MyApplication();
 
 

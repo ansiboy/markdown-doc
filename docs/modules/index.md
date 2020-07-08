@@ -16,6 +16,10 @@ npm i requirejs
 
 ## 使用
 
+<menu>
+
 1. [快速入门](#quick-start)
 1. [代码着色](#color-code)
 1. [加载 JS 脚本](#run-sample)
+
+</menu>
