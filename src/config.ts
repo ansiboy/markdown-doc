@@ -7,4 +7,5 @@ interface Config {
     menuPage?: string,
     /** 隐藏菜单的页面 */
     hideMenuPages?: string[],
+    masterPageElement?: HTMLElement,
 }

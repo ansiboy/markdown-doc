@@ -33,12 +33,29 @@ require("../css/bootstrap.css");
 require("../css/site.css");
 const errors_1 = require("./errors");
 let config = window["config"];
-let masterPage = document.createElement("div");
+if (config.masterPageElement == null) {
+    config.masterPageElement = document.createElement("div");
+    config.masterPageElement.innerHTML = `
+        <div class="master-page">
+            <menu>
+            </menu>
+            <article>
+            </article>
+        </div>
+        <footer>
+        Power By <a href="https://ansiboy.github.io/markdown-doc">markdown-doc</a>
+        </footer>
+    `;
+    let menuElement = config.masterPageElement.querySelector("menu");
+    document.body.onscroll = function (e) {
+        menuElement.style.top = `${document.body.scrollTop}px`;
+    };
+}
 class MyApplication extends maishu_chitu_1.Application {
     constructor(...args) {
-        super({ container: masterPage.querySelector("article") });
+        super({ container: config.masterPageElement.querySelector("article") });
         _menuElement.set(this, void 0);
-        __classPrivateFieldSet(this, _menuElement, masterPage.querySelector("menu"));
+        __classPrivateFieldSet(this, _menuElement, config.masterPageElement.querySelector("menu"));
         this.pageShowing.add((sender, page) => {
             if (config.hideMenuPages != null && config.hideMenuPages.indexOf(page.name) >= 0 &&
                 __classPrivateFieldGet(this, _menuElement) != null) {
@@ -71,20 +88,14 @@ class MyApplication extends maishu_chitu_1.Application {
         });
     }
     static initMasterPage() {
-        masterPage.innerHTML = `
-            <menu>
-            </menu>
-            <article>
-            </article>
-        `;
-        document.body.appendChild(masterPage);
+        document.body.appendChild(config.masterPageElement);
         if (config.menuPage) {
             let path = path_1.pathContact("modules", config.menuPage);
             this.loadMarkdown(path).then(r => {
                 let node = document.createElement("div");
                 node.innerHTML = r.html;
                 let menuNode = node.querySelector("menu");
-                let targetMenuNode = masterPage.querySelector("menu");
+                let targetMenuNode = config.masterPageElement.querySelector("menu");
                 if (menuNode != null && targetMenuNode != null) {
                     targetMenuNode.innerHTML = menuNode.innerHTML;
                 }

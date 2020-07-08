@@ -1559,7 +1559,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "h2 {\r\n  font-size: 24px;\r\n}\r\n\r\nh3 {\r\n  font-size: 20px;\r\n}\r\n\r\na {\r\n  font-size: 16px;\r\n}\r\n\r\nol {\r\n  padding-left: 16px;\r\n}\r\n\r\nmenu {\r\n  float  : left;\r\n}", ""]);
+exports.push([module.i, "h2 {\r\n  font-size: 24px;\r\n}\r\n\r\nh3 {\r\n  font-size: 20px;\r\n}\r\n\r\na {\r\n  font-size: 16px;\r\n}\r\n\r\nol {\r\n  padding-left: 16px;\r\n}\r\n\r\nmenu {\r\n  float   : left;\r\n  position: relative;\r\n}\r\n\r\nfooter {\r\n  position        : fixed;\r\n  bottom          : 0;\r\n  text-align      : center;\r\n  padding         : 15px 0 15px 0;\r\n  width           : 100%;\r\n  background-color: white;\r\n}\r\n\r\n.master-page {\r\n  padding-bottom: 20px;\r\n}", ""]);
 // Exports
 module.exports = exports;
 
@@ -6029,12 +6029,29 @@ __webpack_require__(/*! ../css/bootstrap.css */ "./css/bootstrap.css");
 __webpack_require__(/*! ../css/site.css */ "./css/site.css");
 const errors_1 = __webpack_require__(/*! ./errors */ "./out/errors.js");
 let config = window["config"];
-let masterPage = document.createElement("div");
+if (config.masterPageElement == null) {
+    config.masterPageElement = document.createElement("div");
+    config.masterPageElement.innerHTML = `
+        <div class="master-page">
+            <menu>
+            </menu>
+            <article>
+            </article>
+        </div>
+        <footer>
+        Power By <a href="https://ansiboy.github.io/markdown-doc">markdown-doc</a>
+        </footer>
+    `;
+    let menuElement = config.masterPageElement.querySelector("menu");
+    document.body.onscroll = function (e) {
+        menuElement.style.top = `${document.body.scrollTop}px`;
+    };
+}
 class MyApplication extends maishu_chitu_1.Application {
     constructor(...args) {
-        super({ container: masterPage.querySelector("article") });
+        super({ container: config.masterPageElement.querySelector("article") });
         _menuElement.set(this, void 0);
-        __classPrivateFieldSet(this, _menuElement, masterPage.querySelector("menu"));
+        __classPrivateFieldSet(this, _menuElement, config.masterPageElement.querySelector("menu"));
         this.pageShowing.add((sender, page) => {
             if (config.hideMenuPages != null && config.hideMenuPages.indexOf(page.name) >= 0 &&
                 __classPrivateFieldGet(this, _menuElement) != null) {
@@ -6067,20 +6084,14 @@ class MyApplication extends maishu_chitu_1.Application {
         });
     }
     static initMasterPage() {
-        masterPage.innerHTML = `
-            <menu>
-            </menu>
-            <article>
-            </article>
-        `;
-        document.body.appendChild(masterPage);
+        document.body.appendChild(config.masterPageElement);
         if (config.menuPage) {
             let path = path_1.pathContact("modules", config.menuPage);
             this.loadMarkdown(path).then(r => {
                 let node = document.createElement("div");
                 node.innerHTML = r.html;
                 let menuNode = node.querySelector("menu");
-                let targetMenuNode = masterPage.querySelector("menu");
+                let targetMenuNode = config.masterPageElement.querySelector("menu");
                 if (menuNode != null && targetMenuNode != null) {
                     targetMenuNode.innerHTML = menuNode.innerHTML;
                 }

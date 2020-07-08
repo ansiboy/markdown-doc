@@ -15,5 +15,19 @@ ol {
 }
 
 menu {
-  float  : left;
+  float   : left;
+  position: relative;
+}
+
+footer {
+  position        : fixed;
+  bottom          : 0;
+  text-align      : center;
+  padding         : 15px 0 15px 0;
+  width           : 100%;
+  background-color: white;
+}
+
+.master-page {
+  padding-bottom: 20px;
 }

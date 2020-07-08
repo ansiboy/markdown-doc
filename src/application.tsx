@@ -10,7 +10,24 @@ import { errors } from "./errors";
 
 let config = window["config"] as Config;
 
-let masterPage = document.createElement("div");
+if (config.masterPageElement == null) {
+    config.masterPageElement = document.createElement("div");
+    config.masterPageElement.innerHTML = `
+        <div class="master-page">
+            <menu>
+            </menu>
+            <article>
+            </article>
+        </div>
+        <footer>
+        Power By <a href="https://ansiboy.github.io/markdown-doc">markdown-doc</a>
+        </footer>
+    `;
+    let menuElement = config.masterPageElement.querySelector("menu");
+    document.body.onscroll = function (e) {
+        menuElement.style.top = `${document.body.scrollTop}px`;
+    }
+}
 
 class MyApplication extends Application {
     #menuElement: HTMLMenuElement;
@@ -36,9 +53,9 @@ class MyApplication extends Application {
     }
 
     constructor(...args) {
-        super({ container: masterPage.querySelector("article") });
+        super({ container: config.masterPageElement.querySelector("article") });
 
-        this.#menuElement = masterPage.querySelector("menu");
+        this.#menuElement = config.masterPageElement.querySelector("menu");
 
         this.pageShowing.add((sender, page) => {
             if (config.hideMenuPages != null && config.hideMenuPages.indexOf(page.name) >= 0 &&
@@ -53,25 +70,19 @@ class MyApplication extends Application {
 
 
     static initMasterPage() {
-        masterPage.innerHTML = `
-            <menu>
-            </menu>
-            <article>
-            </article>
-        `;
-        document.body.appendChild(masterPage);
-
+        document.body.appendChild(config.masterPageElement);
         if (config.menuPage) {
             let path = pathContact("modules", config.menuPage);
             this.loadMarkdown(path).then(r => {
                 let node = document.createElement("div");
                 node.innerHTML = r.html;
                 let menuNode = node.querySelector("menu");
-                let targetMenuNode = masterPage.querySelector("menu");
+                let targetMenuNode = config.masterPageElement.querySelector("menu");
                 if (menuNode != null && targetMenuNode != null) {
                     targetMenuNode.innerHTML = menuNode.innerHTML;
                 }
             });
+
         }
     }
 
