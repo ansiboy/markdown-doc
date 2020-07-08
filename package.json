@@ -1,6 +1,6 @@
 {
     "name": "maishu-markdonw-doc",
-    "version": "1.3.0",
+    "version": "1.3.2",
     "dependencies": {
         "maishu-chitu": "^3.27.0",
         "maishu-toolkit": "^1.4.14",

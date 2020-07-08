@@ -6140,7 +6140,9 @@ if (config.masterPageElement == null) {
         Power By <a href="https://ansiboy.github.io/markdown-doc">markdown-doc</a>
         </footer>
     `;
-    let menuElement = config.masterPageElement.querySelector("menu");
+}
+let menuElement = config.masterPageElement.querySelector("menu");
+if (menuElement != null) {
     document.body.onscroll = function (e) {
         menuElement.style.top = `${document.body.scrollTop}px`;
     };
@@ -6191,7 +6193,10 @@ class MyApplication extends maishu_chitu_1.Application {
                 let menuNode = node.querySelector("menu");
                 let targetMenuNode = config.masterPageElement.querySelector("menu");
                 if (menuNode != null && targetMenuNode != null) {
-                    targetMenuNode.innerHTML = menuNode.innerHTML;
+                    // targetMenuNode.innerHTML = menuNode.innerHTML;
+                    let element = document.createElement("div");
+                    element.innerHTML = menuNode.innerHTML;
+                    targetMenuNode.appendChild(element);
                 }
             });
         }
