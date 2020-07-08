@@ -1,6 +1,6 @@
 /*!
  * 
- *  maishu-markdonw-doc v1.0.0
+ *  maishu-markdonw-doc v1.2.0
  *  
  *  Copyright (C) maishu All rights reserved.
  *   
@@ -6057,7 +6057,7 @@ class MyApplication extends maishu_chitu_1.Application {
                             let arr = path.split("/");
                             arr.pop();
                             let directoryPath = arr.join("/");
-                            samplePath = path_1.pathContact("/", directoryPath, samplePath);
+                            samplePath = path_1.pathContact(directoryPath, samplePath);
                             superLoadjs.apply(exports.app, [samplePath]).then(mod => {
                                 let func = mod.default || mod;
                                 if (func == null)
@@ -6073,7 +6073,7 @@ class MyApplication extends maishu_chitu_1.Application {
                                 let arr = path.split("/");
                                 arr.pop();
                                 let directoryPath = arr.join("/");
-                                let codePath = path_1.pathContact("/", directoryPath, name);
+                                let codePath = path_1.pathContact(directoryPath, name);
                                 fetch(codePath).then(r => {
                                     return r.text();
                                 }).then(text => {

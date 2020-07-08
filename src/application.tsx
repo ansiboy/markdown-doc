@@ -49,7 +49,7 @@ class MyApplication extends Application {
                         let arr = path.split("/");
                         arr.pop();
                         let directoryPath = arr.join("/");
-                        samplePath = pathContact("/", directoryPath, samplePath);
+                        samplePath = pathContact(directoryPath, samplePath);
                         superLoadjs.apply(app, [samplePath]).then(mod => {
                             let func = mod.default || mod;
                             if (func == null)
@@ -69,7 +69,7 @@ class MyApplication extends Application {
                             let arr = path.split("/");
                             arr.pop();
                             let directoryPath = arr.join("/");
-                            let codePath = pathContact("/", directoryPath, name);
+                            let codePath = pathContact(directoryPath, name);
                             fetch(codePath).then(r => {
                                 return r.text();
                             }).then(text => {
