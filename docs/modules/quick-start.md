@@ -15,16 +15,18 @@
 
 1. 创建 index.html 文件，如下：
 
-    <html>
-    <head></head>
+    ```html
+        <html>
+        <head></head>
 
-    <body>
-        <script
-        src="node_modules/requirejs/require.js"
-        data-main="node_modules/maishu-markdonw-doc/out/index"
-        ></script>
-    </body>
-    </html>
+        <body>
+            <script
+            src="node_modules/requirejs/require.js"
+            data-main="node_modules/maishu-markdonw-doc/out/index"
+            ></script>
+        </body>
+        </html>
+    ```
 
 1. 创建 markdown 文件
     
