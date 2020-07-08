@@ -23,3 +23,5 @@ npm i requirejs
 1. [加载 JS 脚本](#run-sample)
 
 </menu>
+
+<script src="init.js"><script>

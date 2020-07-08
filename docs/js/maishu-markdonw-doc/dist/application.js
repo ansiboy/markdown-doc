@@ -1559,7 +1559,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "h2 {\r\n  font-size: 24px;\r\n}\r\n\r\nh3 {\r\n  font-size: 20px;\r\n}\r\n\r\na {\r\n  font-size: 16px;\r\n}\r\n\r\nol {\r\n  padding-left: 16px;\r\n}\r\n\r\nmenu {\r\n  float   : left;\r\n  position: relative;\r\n}\r\n\r\nfooter {\r\n  position        : fixed;\r\n  bottom          : 0;\r\n  text-align      : center;\r\n  padding         : 15px 0 15px 0;\r\n  width           : 100%;\r\n  background-color: white;\r\n}\r\n\r\n.master-page {\r\n  padding-bottom: 20px;\r\n}", ""]);
+exports.push([module.i, "h2 {\r\n  font-size: 24px;\r\n}\r\n\r\nh3 {\r\n  font-size: 20px;\r\n}\r\n\r\na {\r\n  font-size: 16px;\r\n}\r\n\r\nol {\r\n  padding-left: 16px;\r\n}\r\n\r\nmenu {\r\n  float   : left;\r\n  position: relative;\r\n}\r\n\r\nfooter {\r\n  position        : fixed;\r\n  bottom          : 0;\r\n  text-align      : center;\r\n  padding         : 15px 0 15px 0;\r\n  width           : 100%;\r\n  background-color: white;\r\n}\r\n\r\n.master-page .main {\r\n  padding-bottom: 20px;\r\n}\r\n\r\n.index .main > menu {\r\n  display: none;\r\n}\r\n\r\narticle menu {\r\n  margin : 0;\r\n  padding: 0;\r\n}", ""]);
 // Exports
 module.exports = exports;
 
@@ -3166,6 +3166,103 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_maishu_chitu_service__;
 });
 //# sourceMappingURL=index.js.map
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! (webpack)/buildin/global.js */ "C:\\Users\\ansib\\AppData\\Roaming\\npm\\node_modules\\webpack\\buildin\\global.js")))
+
+/***/ }),
+
+/***/ "./node_modules/maishu-toolkit/out/errors.js":
+/*!***************************************************!*\
+  !*** ./node_modules/maishu-toolkit/out/errors.js ***!
+  \***************************************************/
+/*! exports provided: Errors, errors */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Errors", function() { return Errors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "errors", function() { return errors; });
+class Errors {
+    argumentNull(argumentName) {
+        let error = new Error(`Argument ${argumentName} cannt be null or emtpy.`);
+        let name = "argumentNull";
+        error.name = name;
+        return error;
+    }
+    routeDataFieldNull(fieldName) {
+        let msg = `The ${fieldName} field of route data cannt be null.`;
+        let error = new Error(msg);
+        let name = "routeDataFieldNull";
+        error.name = name;
+        return error;
+    }
+    argumentFieldNull(fieldName, argumentName) {
+        let msg = `The ${fieldName} field of ${argumentName} cannt be null.`;
+        let error = new Error(msg);
+        let name = "argumentFieldNull";
+        error.name = name;
+        return error;
+    }
+    argumentTypeIncorrect(argumentName, expectedType) {
+        let msg = `Argument ${argumentName} type error, expected type is ${expectedType}.`;
+        let error = new Error(msg);
+        let name = "argumentTypeIncorrect";
+        error.name = name;
+        return error;
+    }
+}
+let errors = new Errors();
+
+
+/***/ }),
+
+/***/ "./node_modules/maishu-toolkit/out/html.js":
+/*!*************************************************!*\
+  !*** ./node_modules/maishu-toolkit/out/html.js ***!
+  \*************************************************/
+/*! exports provided: HTML */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HTML", function() { return HTML; });
+/* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./errors */ "./node_modules/maishu-toolkit/out/errors.js");
+
+class HTML {
+    static addClassName(element, addonClassName) {
+        if (element == null)
+            throw _errors__WEBPACK_IMPORTED_MODULE_0__["errors"].argumentNull('element');
+        if (!addonClassName)
+            throw _errors__WEBPACK_IMPORTED_MODULE_0__["errors"].argumentNull('addonClassName');
+        let sourceClassName;
+        if (typeof element == 'string')
+            sourceClassName = element;
+        else
+            sourceClassName = element.className;
+        sourceClassName = sourceClassName || '';
+        console.assert(addonClassName != null);
+        if (sourceClassName.indexOf(addonClassName) >= 0)
+            return sourceClassName;
+        let className = `${sourceClassName} ${addonClassName}`;
+        if (typeof element != 'string')
+            element.className = className;
+        return className;
+    }
+    static removeClassName(element, targetClassName) {
+        let sourceClassName;
+        if (typeof element == 'string')
+            sourceClassName = element;
+        else
+            sourceClassName = element.className || '';
+        if (sourceClassName.indexOf(targetClassName) < 0)
+            return sourceClassName;
+        sourceClassName = sourceClassName || '';
+        sourceClassName = sourceClassName.replace(new RegExp(targetClassName, 'g'), '');
+        sourceClassName = sourceClassName.trim();
+        if (typeof element != 'string')
+            element.className = sourceClassName;
+        return sourceClassName;
+    }
+}
+
 
 /***/ }),
 
@@ -6017,7 +6114,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     }
     return privateMap.get(receiver);
 };
-var _menuElement;
+var _menuElement, _pageClassName;
 Object.defineProperty(exports, "__esModule", { value: true });
 const maishu_chitu_1 = __webpack_require__(/*! maishu-chitu */ "./node_modules/maishu-chitu/dist/index.js");
 const marked = __webpack_require__(/*! marked */ "./node_modules/marked/lib/marked.js");
@@ -6028,11 +6125,12 @@ __webpack_require__(/*! ../js/highlight/styles/rainbow.css */ "./js/highlight/st
 __webpack_require__(/*! ../css/bootstrap.css */ "./css/bootstrap.css");
 __webpack_require__(/*! ../css/site.css */ "./css/site.css");
 const errors_1 = __webpack_require__(/*! ./errors */ "./out/errors.js");
+const html_1 = __webpack_require__(/*! maishu-toolkit/out/html */ "./node_modules/maishu-toolkit/out/html.js");
 let config = window["config"];
 if (config.masterPageElement == null) {
     config.masterPageElement = document.createElement("div");
     config.masterPageElement.innerHTML = `
-        <div class="master-page">
+        <div class="main">
             <menu>
             </menu>
             <article>
@@ -6047,19 +6145,19 @@ if (config.masterPageElement == null) {
         menuElement.style.top = `${document.body.scrollTop}px`;
     };
 }
+config.masterPageElement.className = "master-page";
 class MyApplication extends maishu_chitu_1.Application {
     constructor(...args) {
         super({ container: config.masterPageElement.querySelector("article") });
         _menuElement.set(this, void 0);
+        _pageClassName.set(this, void 0);
         __classPrivateFieldSet(this, _menuElement, config.masterPageElement.querySelector("menu"));
         this.pageShowing.add((sender, page) => {
-            if (config.hideMenuPages != null && config.hideMenuPages.indexOf(page.name) >= 0 &&
-                __classPrivateFieldGet(this, _menuElement) != null) {
-                __classPrivateFieldGet(this, _menuElement).style.display = "none";
+            if (__classPrivateFieldGet(this, _pageClassName)) {
+                html_1.HTML.removeClassName(config.masterPageElement, __classPrivateFieldGet(this, _pageClassName));
             }
-            else {
-                __classPrivateFieldGet(this, _menuElement).style.removeProperty("display");
-            }
+            __classPrivateFieldSet(this, _pageClassName, page.name);
+            html_1.HTML.addClassName(config.masterPageElement, page.name);
         });
     }
     static loadMarkdown(path) {
@@ -6158,7 +6256,7 @@ class MyApplication extends maishu_chitu_1.Application {
         });
     }
 }
-_menuElement = new WeakMap();
+_menuElement = new WeakMap(), _pageClassName = new WeakMap();
 MyApplication.initMasterPage();
 exports.app = new MyApplication();
 

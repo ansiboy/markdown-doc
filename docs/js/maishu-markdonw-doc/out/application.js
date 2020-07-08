@@ -21,7 +21,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     }
     return privateMap.get(receiver);
 };
-var _menuElement;
+var _menuElement, _pageClassName;
 Object.defineProperty(exports, "__esModule", { value: true });
 const maishu_chitu_1 = require("maishu-chitu");
 const marked = require("marked");
@@ -32,11 +32,12 @@ require("../js/highlight/styles/rainbow.css");
 require("../css/bootstrap.css");
 require("../css/site.css");
 const errors_1 = require("./errors");
+const html_1 = require("maishu-toolkit/out/html");
 let config = window["config"];
 if (config.masterPageElement == null) {
     config.masterPageElement = document.createElement("div");
     config.masterPageElement.innerHTML = `
-        <div class="master-page">
+        <div class="main">
             <menu>
             </menu>
             <article>
@@ -51,19 +52,19 @@ if (config.masterPageElement == null) {
         menuElement.style.top = `${document.body.scrollTop}px`;
     };
 }
+config.masterPageElement.className = "master-page";
 class MyApplication extends maishu_chitu_1.Application {
     constructor(...args) {
         super({ container: config.masterPageElement.querySelector("article") });
         _menuElement.set(this, void 0);
+        _pageClassName.set(this, void 0);
         __classPrivateFieldSet(this, _menuElement, config.masterPageElement.querySelector("menu"));
         this.pageShowing.add((sender, page) => {
-            if (config.hideMenuPages != null && config.hideMenuPages.indexOf(page.name) >= 0 &&
-                __classPrivateFieldGet(this, _menuElement) != null) {
-                __classPrivateFieldGet(this, _menuElement).style.display = "none";
+            if (__classPrivateFieldGet(this, _pageClassName)) {
+                html_1.HTML.removeClassName(config.masterPageElement, __classPrivateFieldGet(this, _pageClassName));
             }
-            else {
-                __classPrivateFieldGet(this, _menuElement).style.removeProperty("display");
-            }
+            __classPrivateFieldSet(this, _pageClassName, page.name);
+            html_1.HTML.addClassName(config.masterPageElement, page.name);
         });
     }
     static loadMarkdown(path) {
@@ -162,6 +163,6 @@ class MyApplication extends maishu_chitu_1.Application {
         });
     }
 }
-_menuElement = new WeakMap();
+_menuElement = new WeakMap(), _pageClassName = new WeakMap();
 MyApplication.initMasterPage();
 exports.app = new MyApplication();
