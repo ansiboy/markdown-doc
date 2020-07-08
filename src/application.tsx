@@ -7,13 +7,14 @@ import "../js/highlight/styles/rainbow.css";
 import "../css/bootstrap.css";
 import "../css/site.css";
 import { errors } from "./errors";
+import { HTML } from "maishu-toolkit/out/html";
 
 let config = window["config"] as Config;
 
 if (config.masterPageElement == null) {
     config.masterPageElement = document.createElement("div");
     config.masterPageElement.innerHTML = `
-        <div class="master-page">
+        <div class="main">
             <menu>
             </menu>
             <article>
@@ -29,8 +30,12 @@ if (config.masterPageElement == null) {
     }
 }
 
+config.masterPageElement.className = "master-page";
+
+
 class MyApplication extends Application {
     #menuElement: HTMLMenuElement;
+    #pageClassName: string;
 
     private static async loadMarkdown(path: string) {
         let r = await fetch(path);
@@ -58,13 +63,11 @@ class MyApplication extends Application {
         this.#menuElement = config.masterPageElement.querySelector("menu");
 
         this.pageShowing.add((sender, page) => {
-            if (config.hideMenuPages != null && config.hideMenuPages.indexOf(page.name) >= 0 &&
-                this.#menuElement != null) {
-                this.#menuElement.style.display = "none";
+            if (this.#pageClassName) {
+                HTML.removeClassName(config.masterPageElement, this.#pageClassName);
             }
-            else {
-                this.#menuElement.style.removeProperty("display");
-            }
+            this.#pageClassName = page.name;
+            HTML.addClassName(config.masterPageElement, page.name);
         })
     }
 
