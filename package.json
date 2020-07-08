@@ -2,14 +2,15 @@
     "name": "maishu-markdonw-doc",
     "version": "1.2.0",
     "dependencies": {
-        "maishu-chitu-react": "^1.27.0",
-        "marked": "^1.1.0",
-        "react": "^16.13.1",
-        "react-dom": "^16.13.1"
+        "maishu-chitu": "^3.27.0",
+        "marked": "^1.1.0"
     },
     "devDependencies": {
         "@types/marked": "^1.1.0",
         "css-loader": "^3.6.0",
+        "grunt": "^1.2.1",
+        "grunt-contrib-copy": "^1.0.0",
+        "load-grunt-tasks": "^5.1.0",
         "style-loader": "^1.2.1",
         "webpack": "^4.43.0"
     }
