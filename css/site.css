@@ -26,13 +26,14 @@ footer {
   padding         : 15px 0 15px 0;
   width           : 100%;
   background-color: white;
+  height          : 50px;
 }
 
 .master-page .main {
-  padding-bottom: 20px;
+  padding-bottom: 50px;
 }
 
-.index .main > menu {
+.index .main>menu {
   display: none;
 }
 

@@ -1,6 +1,6 @@
 /*!
  * 
- *  maishu-markdonw-doc v1.3.0
+ *  maishu-markdonw-doc v1.3.5
  *  
  *  Copyright (C) maishu All rights reserved.
  *   
@@ -1559,7 +1559,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "h2 {\r\n  font-size: 24px;\r\n}\r\n\r\nh3 {\r\n  font-size: 20px;\r\n}\r\n\r\na {\r\n  font-size: 16px;\r\n}\r\n\r\nol {\r\n  padding-left: 16px;\r\n}\r\n\r\nmenu {\r\n  float   : left;\r\n  position: relative;\r\n}\r\n\r\nfooter {\r\n  position        : fixed;\r\n  bottom          : 0;\r\n  text-align      : center;\r\n  padding         : 15px 0 15px 0;\r\n  width           : 100%;\r\n  background-color: white;\r\n}\r\n\r\n.master-page .main {\r\n  padding-bottom: 20px;\r\n}\r\n\r\n.index .main > menu {\r\n  display: none;\r\n}\r\n\r\narticle menu {\r\n  margin : 0;\r\n  padding: 0;\r\n}", ""]);
+exports.push([module.i, "h2 {\r\n  font-size: 24px;\r\n}\r\n\r\nh3 {\r\n  font-size: 20px;\r\n}\r\n\r\na {\r\n  font-size: 16px;\r\n}\r\n\r\nol {\r\n  padding-left: 16px;\r\n}\r\n\r\nmenu {\r\n  float   : left;\r\n  position: relative;\r\n}\r\n\r\nfooter {\r\n  position        : fixed;\r\n  bottom          : 0;\r\n  text-align      : center;\r\n  padding         : 15px 0 15px 0;\r\n  width           : 100%;\r\n  background-color: white;\r\n  height          : 50px;\r\n}\r\n\r\n.master-page .main {\r\n  padding-bottom: 50px;\r\n}\r\n\r\n.index .main>menu {\r\n  display: none;\r\n}\r\n\r\narticle menu {\r\n  margin : 0;\r\n  padding: 0;\r\n}", ""]);
 // Exports
 module.exports = exports;
 
