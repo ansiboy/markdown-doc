@@ -4,7 +4,7 @@
     "dependencies": {
         "maishu-chitu": "^3.27.0",
         "maishu-toolkit": "^1.4.14",
-        "marked": "^1.1.0"
+        "marked": "^4.0.10"
     },
     "devDependencies": {
         "@types/marked": "^1.1.0",
